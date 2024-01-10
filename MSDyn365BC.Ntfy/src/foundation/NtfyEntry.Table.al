@@ -25,6 +25,11 @@ table 71179875 NtfyEntryNTSTM
         {
             Caption = 'Event Type';
         }
+        field(4; FilterText; Text[2048])
+        {
+            AllowInCustomizations = Never;
+            Caption = 'Filter Text';
+        }
     }
 
     keys
