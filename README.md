@@ -1,10 +1,13 @@
-# AL-Go AppSource App Template
-This template repository can be used for managing AppSource Apps for Business Central.
+# MSDyn365BC.Ntfy
 
-Please go to https://aka.ms/AL-Go to learn more.
+This app is a wrapper around Ntfy.sh - an open source notification service.
 
-## Contributing
+The goal of this app is to let users setup notification for various "events" in Buisness Central, notifying them, when the action is finished.
 
-Please read [this](https://github.com/microsoft/AL-Go/blob/main/Scenarios/Contribute.md) description on how to contribute to AL-Go for GitHub.
+Example:
+You schedule a number of invoices for background posting and want to know when it finished. 
+Just setup a notification and you will get a push notification to your phone.
 
-We do not accept Pull Requests on the template repository directly.
+Another example:
+You have a report that you need to print out every week but it takes 15 minutes to render.
+Setup a notification so you know when you need to finish your coffee break ;)
