@@ -3,13 +3,14 @@
   "name": "MSDyn365BC.Ntfy",
   "publisher": "Stefan Maron Consulting",
   "version": "1.0.0.0",
-  "brief": "",
-  "description": "",
-  "privacyStatement": "",
-  "EULA": "",
-  "help": "",
-  "url": "",
-  "logo": "",
+  "brief": "Helps you to load your data from Clockify to Business Central and to create invoices based on your tracked times.",
+  "description": "Helps you to load your data from Clockify to Business Central and to create invoices based on your tracked times.",
+  "privacyStatement": "https://stefanmaron.com/privacystatement/",
+  "EULA": "https://stefanmaron.com/eula/",
+  "help": "https://stefanmaron.com/MSDyn365BC-Ntf/",
+  "contextSensitiveHelpUrl": "https://stefanmaron.com/MSDyn365BC-Ntf/",
+  "url": "https://stefanmaron.com/MSDyn365BC-Ntf/",
+  "logo": "assets/Ntfy.png",
   "dependencies": [],
   "screenshots": [],
   "platform": "1.0.0.0",
@@ -21,7 +22,11 @@
     }
   ],
   "features": [
-    "NoImplicitWith"
+    "NoImplicitWith",
+    "TranslationFile"
+  ],
+  "suppressWarnings": [
+    "AA0215"
   ],
   "resourceExposurePolicy": {
     "allowDebugging": true,

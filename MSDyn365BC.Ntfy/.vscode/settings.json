@@ -1,0 +1,17 @@
+{
+    "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.RemoveSuffixFromFilename": true,
+    "CRS.OnSaveAlFileAction": "Reorganize",
+    "CRS.ObjectNameSuffix": "NTSTM",
+    "al.codeAnalyzers": [
+        "${CodeCop}",
+        "${UICop}",
+        "${AppSourceCop}",
+        "${analyzerFolder}BusinessCentral.LinterCop.dll"
+    ],
+    "cSpell.words": [
+        "NTSTM"
+    ]
+}
