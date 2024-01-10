@@ -1,6 +1,6 @@
 # MSDyn365BC.Ntfy
 
-This app is a wrapper around Ntfy.sh - an open source notification service.
+This app is a wrapper around https://ntfy.sh - an open source notification service.
 
 The goal of this app is to let users setup notification for various "events" in Buisness Central, notifying them, when the action is finished.
 
