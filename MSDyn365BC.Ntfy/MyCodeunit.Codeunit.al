@@ -1,4 +1,4 @@
-namespace DefaultPublisher.Ntfy;
+namespace StefanMaron.Ntfy;
 using Microsoft.Sales.Document;
 using System.RestClient;
 

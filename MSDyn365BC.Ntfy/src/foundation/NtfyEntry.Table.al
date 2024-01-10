@@ -1,4 +1,4 @@
-namespace DefaultPublisher.Ntfy;
+namespace StefanMaron.Ntfy;
 using System.Security.AccessControl;
 
 

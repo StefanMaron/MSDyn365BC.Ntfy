@@ -1,5 +1,5 @@
-namespace DefaultPublisher.Ntfy;
-using DefaultPublisher.Ntfy;
+namespace StefanMaron.Ntfy;
+using StefanMaron.Ntfy;
 page 71179875 NtfyEntryNTSTM
 {
     PageType = List;

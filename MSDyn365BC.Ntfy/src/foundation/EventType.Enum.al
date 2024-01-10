@@ -1,4 +1,4 @@
-namespace DefaultPublisher.Ntfy;
+namespace StefanMaron.Ntfy;
 
 enum 71179875 EventTypeNTSTM
 {
