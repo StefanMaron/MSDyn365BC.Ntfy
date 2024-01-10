@@ -1,7 +1,7 @@
 {
   "country": "us",
   "appSourceCopMandatoryAffixes": [
-    "<affix>"
+    "NTSTM"
   ],
   "appFolders": [],
   "testFolders": [],
