@@ -2,11 +2,12 @@ namespace StefanMaron.Ntfy;
 using System.Security.AccessControl;
 
 
-table 71179875 NtfyEntryNTSTM
+table 71179876 NtfyTopicNTSTM
 {
+    Caption = 'Ntfy Topic';
+    DrillDownPageId = NtfyTopicsNTSTM;
+    LookupPageId = NtfyTopicsNTSTM;
     DataClassification = CustomerContent;
-    DrillDownPageId = NtfyEntryNTSTM;
-    LookupPageId = NtfyEntryNTSTM;
 
     fields
     {
@@ -16,20 +17,15 @@ table 71179875 NtfyEntryNTSTM
             TableRelation = User."User Name";
             ValidateTableRelation = false;
         }
-        field(2; NtfyTopic; Text[150])
+        field(2; Topic; Text[150])
         {
             Caption = 'Topic';
-            TableRelation = NtfyTopicNTSTM.Topic;
-        }
-        field(3; EventType; Enum EventTypeNTSTM)
-        {
-            Caption = 'Event Type';
         }
     }
 
     keys
     {
-        key(Key1; UserName, NtfyTopic, EventType)
+        key(Key1; UserName, Topic)
         {
             Clustered = true;
         }

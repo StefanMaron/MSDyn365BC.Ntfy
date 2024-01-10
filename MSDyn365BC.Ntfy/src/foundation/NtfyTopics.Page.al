@@ -1,14 +1,14 @@
 namespace StefanMaron.Ntfy;
 using StefanMaron.Ntfy;
-page 71179875 NtfyEntryNTSTM
+page 71179876 NtfyTopicsNTSTM
 {
-    Caption = 'Ntfy Entry';
+    Caption = 'Ntfy Topics';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Administration;
     DelayedInsert = true;
-    SourceTable = NtfyEntryNTSTM;
     PopulateAllFields = true;
+    SourceTable = NtfyTopicNTSTM;
 
     layout
     {
@@ -18,11 +18,10 @@ page 71179875 NtfyEntryNTSTM
             {
                 field(UserName; Rec.UserName)
                 {
-                    //TODO: Visible for administrators 
+                    //TODO: Visible for administrators
                     Visible = false;
                 }
-                field(NtfyTopic; Rec.NtfyTopic) { }
-                field(EventType; Rec.EventType) { }
+                field(NtfyTopic; Rec.Topic) { }
             }
         }
     }

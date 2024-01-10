@@ -10,8 +10,5 @@
         "${UICop}",
         "${AppSourceCop}",
         "${analyzerFolder}BusinessCentral.LinterCop.dll"
-    ],
-    "cSpell.words": [
-        "NTSTM"
     ]
 }
