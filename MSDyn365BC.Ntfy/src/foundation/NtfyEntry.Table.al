@@ -47,4 +47,14 @@ table 71179875 NtfyEntryNTSTM
         INtfyEvent := Rec.EventType;
         INtfyEvent.SetFilters(Rec);
     end;
+
+    procedure RunBatch()
+    var
+        TempSessionId: Integer;
+    begin
+        Commit();
+        StartSession(TempSessionId, Codeunit::BatchSendNtfysNTSTM, CompanyName, Rec);
+        // if not TaskScheduler.CreateTask() then
+        // Codeunit.Run(Codeunit::BatchSendNtfysNTSTM, Rec);
+    end;
 }
