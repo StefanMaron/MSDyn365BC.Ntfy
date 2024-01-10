@@ -1,3 +1,5 @@
 {
-    "mandatorySuffix": "NTSTM"
+    "mandatoryAffixes": [
+        "NTSTM"
+    ]
 }
