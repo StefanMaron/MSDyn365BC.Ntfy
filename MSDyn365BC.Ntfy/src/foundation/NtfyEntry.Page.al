@@ -23,6 +23,31 @@ page 71179875 NtfyEntryNTSTM
                 }
                 field(NtfyTopic; Rec.NtfyTopic) { }
                 field(EventType; Rec.EventType) { }
+                field(FilterText; Rec.FilterText)
+                {
+                    Caption = 'Filter';
+                    Editable = false;
+                }
+            }
+        }
+    }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(SetFilters)
+            {
+                ApplicationArea = All;
+                Caption = 'Set Filters';
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Filter;
+
+                trigger OnAction()
+                begin
+                    Rec.SetFiltersTroughInterface();
+                end;
             }
         }
     }

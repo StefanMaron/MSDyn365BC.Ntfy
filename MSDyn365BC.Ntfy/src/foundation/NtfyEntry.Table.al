@@ -39,4 +39,12 @@ table 71179875 NtfyEntryNTSTM
             Clustered = true;
         }
     }
+
+    procedure SetFiltersTroughInterface()
+    var
+        INtfyEvent: Interface INtfyEventNTSTM;
+    begin
+        INtfyEvent := Rec.EventType;
+        INtfyEvent.SetFilters(Rec);
+    end;
 }
