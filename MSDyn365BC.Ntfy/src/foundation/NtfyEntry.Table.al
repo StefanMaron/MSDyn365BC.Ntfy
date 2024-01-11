@@ -30,6 +30,16 @@ table 71179875 NtfyEntryNTSTM
             AllowInCustomizations = Never;
             Caption = 'Filter Text';
         }
+        field(5; NtfyTitle; Text[150])
+        {
+            Caption = 'Title';
+            //Temporary user only
+        }
+        field(6; NtfyMessage; Text[2048])
+        {
+            Caption = 'Message';
+            //Temporary user only
+        }
     }
 
     keys
@@ -52,7 +62,6 @@ table 71179875 NtfyEntryNTSTM
     var
         TempSessionId: Integer;
     begin
-        Commit(); //Need to commit the isolated storage so the background session can read the data
         if not StartSession(TempSessionId, Codeunit::BatchSendNtfysNTSTM, CompanyName, Rec) then
             Codeunit.Run(Codeunit::BatchSendNtfysNTSTM, Rec);
 

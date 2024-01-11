@@ -28,8 +28,6 @@ codeunit 71179878 SalesDocumentReopenedNTSTM implements INtfyEventNTSTM
         NtfyEntry: Record NtfyEntryNTSTM;
         DoCall: Boolean;
     begin
-        IsolatedStorage.Set('NtfyDescription', StrSubstNo('Sales %1 - %2 - has been released', SalesHeader."Document Type", SalesHeader."No."), DataScope::User);
-
         NtfyEntry.SetRange(EventType, NtfyEntry.EventType::SalesDocumentReopened);
         NtfyEntry.SetFilter(NtfyTopic, '<>%1', '');
         if NtfyEntry.FindSet() then
@@ -47,6 +45,8 @@ codeunit 71179878 SalesDocumentReopenedNTSTM implements INtfyEventNTSTM
                 if DoCall then
                     NtfyEntry.Mark(true);
             until NtfyEntry.Next() = 0;
+
+        NtfyEntry.NtfyMessage := StrSubstNo('Sales %1 - %2 - has been reopened', SalesHeader."Document Type", SalesHeader."No.");
 
         NtfyEntry.MarkedOnly(true);
         NtfyEntry.RunBatch();
