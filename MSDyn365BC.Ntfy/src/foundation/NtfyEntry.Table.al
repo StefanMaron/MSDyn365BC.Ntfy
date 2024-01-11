@@ -52,9 +52,10 @@ table 71179875 NtfyEntryNTSTM
     var
         TempSessionId: Integer;
     begin
-        Commit();
-        StartSession(TempSessionId, Codeunit::BatchSendNtfysNTSTM, CompanyName, Rec);
-        // if not TaskScheduler.CreateTask() then
-        // Codeunit.Run(Codeunit::BatchSendNtfysNTSTM, Rec);
+        Commit(); //Need to commit the isolated storage so the background session can read the data
+        if not StartSession(TempSessionId, Codeunit::BatchSendNtfysNTSTM, CompanyName, Rec) then
+            Codeunit.Run(Codeunit::BatchSendNtfysNTSTM, Rec);
+
+
     end;
 }

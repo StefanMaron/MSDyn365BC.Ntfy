@@ -26,16 +26,14 @@ codeunit 71179878 SalesDocumentReopenedNTSTM implements INtfyEventNTSTM
     var
         FilterSalesHeader: Record "Sales Header";
         NtfyEntry: Record NtfyEntryNTSTM;
-        RestClient: Codeunit "Rest Client";
-        Body: Codeunit "Http Content";
         DoCall: Boolean;
     begin
+        IsolatedStorage.Set('NtfyDescription', StrSubstNo('Sales %1 - %2 - has been released', SalesHeader."Document Type", SalesHeader."No."), DataScope::User);
+
         NtfyEntry.SetRange(EventType, NtfyEntry.EventType::SalesDocumentReopened);
         NtfyEntry.SetFilter(NtfyTopic, '<>%1', '');
         if NtfyEntry.FindSet() then
             repeat
-                Clear(Body);
-                Clear(RestClient);
                 Clear(FilterSalesHeader);
                 DoCall := true;
 
@@ -46,12 +44,12 @@ codeunit 71179878 SalesDocumentReopenedNTSTM implements INtfyEventNTSTM
                     DoCall := not FilterSalesHeader.IsEmpty();
                 end;
 
-                if DoCall then begin
-                    Body.Create(StrSubstNo('Sales %1 - %2 - has been reopened', SalesHeader."Document Type", SalesHeader."No."));
-                    RestClient.Post(StrSubstNo('https://ntfy.sh/%1', NtfyEntry.NtfyTopic), Body).GetContent().AsText();
-                end;
+                if DoCall then
+                    NtfyEntry.Mark(true);
             until NtfyEntry.Next() = 0;
 
+        NtfyEntry.MarkedOnly(true);
+        NtfyEntry.RunBatch();
     end;
 
 }

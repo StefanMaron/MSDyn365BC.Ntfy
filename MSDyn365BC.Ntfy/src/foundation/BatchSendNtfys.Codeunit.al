@@ -17,8 +17,6 @@ codeunit 71179879 BatchSendNtfysNTSTM
         Body.Create(Description);
         IsolatedStorage.Delete('NtfyDescription', DataScope::User);
 
-        NtfyEntry.SetRange(EventType, NtfyEntry.EventType::SalesDocumentReopened);
-        NtfyEntry.SetFilter(NtfyTopic, '<>%1', '');
         if NtfyEntry.FindSet() then
             repeat
                 Clear(RestClient);

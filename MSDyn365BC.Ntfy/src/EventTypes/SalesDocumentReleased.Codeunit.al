@@ -26,8 +26,6 @@ codeunit 71179877 SalesDocumentReleasedNTSTM implements INtfyEventNTSTM
     var
         FilterSalesHeader: Record "Sales Header";
         NtfyEntry: Record NtfyEntryNTSTM;
-        RestClient: Codeunit "Rest Client";
-        Body: Codeunit "Http Content";
         DoCall: Boolean;
     begin
         IsolatedStorage.Set('NtfyDescription', StrSubstNo('Sales %1 - %2 - has been released', SalesHeader."Document Type", SalesHeader."No."), DataScope::User);
@@ -36,8 +34,6 @@ codeunit 71179877 SalesDocumentReleasedNTSTM implements INtfyEventNTSTM
         NtfyEntry.SetFilter(NtfyTopic, '<>%1', '');
         if NtfyEntry.FindSet() then
             repeat
-                Clear(Body);
-                Clear(RestClient);
                 Clear(FilterSalesHeader);
                 DoCall := true;
 
