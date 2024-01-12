@@ -36,17 +36,17 @@ page 71179875 NtfyEntryNTSTM
     {
         area(Processing)
         {
-            action(SetFilters)
+            action(SetSettings)
             {
                 ApplicationArea = All;
-                Caption = 'Set Filters';
+                Caption = 'Settings';
                 Promoted = true;
                 PromotedCategory = Process;
-                Image = Filter;
+                Image = Setup;
 
                 trigger OnAction()
                 begin
-                    Rec.SetFiltersTroughInterface();
+                    Rec.SetSettingsTroughInterface();
                 end;
             }
         }

@@ -5,7 +5,7 @@ using System.RestClient;
 codeunit 71179877 SalesDocumentReleasedNTSTM implements INtfyEventNTSTM
 {
 
-    procedure SetFilters(NtfyEntry: Record NtfyEntryNTSTM)
+    procedure SetSettings(NtfyEntry: Record NtfyEntryNTSTM)
     var
         FilterPageBuilder: FilterPageBuilder;
     begin
@@ -21,35 +21,33 @@ codeunit 71179877 SalesDocumentReleasedNTSTM implements INtfyEventNTSTM
         end;
     end;
 
+    procedure DoCallNtfyEntry(NtfyEntry: Record NtfyEntryNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Boolean
+    var
+        FilterSalesHeader: Record "Sales Header";
+    begin
+        ReturnValue := true;
+        if NtfyEntry.FilterText <> '' then begin
+            FilterSalesHeader.SetView(NtfyEntry.FilterText);
+            FilterSalesHeader.FilterGroup(2);
+            FilterSalesHeader.SetRange(SystemId, Params.Get('SystemID'));
+            ReturnValue := not FilterSalesHeader.IsEmpty();
+        end;
+    end;
+
+    procedure GetMessage(Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
+    begin
+        exit(StrSubstNo('Sales %1 - %2 - has been released', Params.Get('DocumentType'), Params.Get('No')));
+    end;
+
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Release Sales Document", OnAfterReleaseSalesDoc, '', false, false)]
     local procedure SentNtfyOnAfterReleaseSalesDoc(var SalesHeader: Record "Sales Header")
     var
-        FilterSalesHeader: Record "Sales Header";
         NtfyEntry: Record NtfyEntryNTSTM;
-        DoCall: Boolean;
+        Params: Dictionary of [Text, Text];
     begin
-        NtfyEntry.SetRange(EventType, NtfyEntry.EventType::SalesDocumentReleased);
-        NtfyEntry.SetFilter(NtfyTopic, '<>%1', '');
-        if NtfyEntry.FindSet() then
-            repeat
-                Clear(FilterSalesHeader);
-                DoCall := true;
-
-                if NtfyEntry.FilterText <> '' then begin
-                    FilterSalesHeader.SetView(NtfyEntry.FilterText);
-                    FilterSalesHeader.FilterGroup(2);
-                    FilterSalesHeader.SetRange(SystemId, SalesHeader."SystemId");
-                    DoCall := not FilterSalesHeader.IsEmpty();
-                end;
-
-                if DoCall then
-                    NtfyEntry.Mark(true);
-            until NtfyEntry.Next() = 0;
-
-        NtfyEntry.NtfyMessage := StrSubstNo('Sales %1 - %2 - has been released', SalesHeader."Document Type", SalesHeader."No.");
-
-        NtfyEntry.MarkedOnly(true);
-        NtfyEntry.RunBatch();
+        Params.Add('SystemID', SalesHeader."SystemId");
+        Params.Add('DocumentType', Format(SalesHeader."Document Type"));
+        Params.Add('No', SalesHeader."No.");
+        NtfyEntry.SendNotifications(NtfyEntry.EventType::SalesDocumentReleased, Params);
     end;
-
 }

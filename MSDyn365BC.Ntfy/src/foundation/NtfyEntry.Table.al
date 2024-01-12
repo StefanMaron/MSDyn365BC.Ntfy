@@ -50,12 +50,12 @@ table 71179875 NtfyEntryNTSTM
         }
     }
 
-    procedure SetFiltersTroughInterface()
+    procedure SetSettingsTroughInterface()
     var
         INtfyEvent: Interface INtfyEventNTSTM;
     begin
         INtfyEvent := Rec.EventType;
-        INtfyEvent.SetFilters(Rec);
+        INtfyEvent.SetSettings(Rec);
     end;
 
     procedure RunBatch()
@@ -64,7 +64,27 @@ table 71179875 NtfyEntryNTSTM
     begin
         if not StartSession(TempSessionId, Codeunit::BatchSendNtfysNTSTM, CompanyName, Rec) then
             Codeunit.Run(Codeunit::BatchSendNtfysNTSTM, Rec);
+    end;
 
+    procedure SendNotifications(Type: Enum EventTypeNTSTM; Params: Dictionary of [Text, Text])
+    var
+        NtfyEntry: Record NtfyEntryNTSTM;
+        INtfyEvent: Interface INtfyEventNTSTM;
+    begin
+        INtfyEvent := Type;
+
+        NtfyEntry.SetRange(EventType, Type);
+        NtfyEntry.SetFilter(NtfyTopic, '<>%1', '');
+        if NtfyEntry.FindSet() then
+            repeat
+                if INtfyEvent.DoCallNtfyEntry(NtfyEntry, Params) then
+                    NtfyEntry.Mark(true);
+            until NtfyEntry.Next() = 0;
+
+        NtfyEntry.NtfyMessage := INtfyEvent.GetMessage(Params);
+
+        NtfyEntry.MarkedOnly(true);
+        NtfyEntry.RunBatch();
 
     end;
 }
