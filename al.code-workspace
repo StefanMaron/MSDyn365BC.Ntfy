@@ -4,6 +4,9 @@
       "path": "MSDyn365BC.Ntfy"
     },
     {
+      "path": "MSDyn365BC.Ntfy.Test"
+    },
+    {
       "path": ".AL-Go"
     }
   ],
