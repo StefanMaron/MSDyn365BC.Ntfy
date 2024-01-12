@@ -83,6 +83,7 @@ table 71179875 NtfyEntryNTSTM
 
         NtfyEntry.SetRange(EventType, Type);
         NtfyEntry.SetFilter(NtfyTopic, '<>%1', '');
+        INtfyEvent.FilterNtfyEntriesBeforeBatchSend(NtfyEntry, Params);
         if NtfyEntry.FindSet() then
             repeat
                 if INtfyEvent.DoCallNtfyEntry(NtfyEntry, Params) then

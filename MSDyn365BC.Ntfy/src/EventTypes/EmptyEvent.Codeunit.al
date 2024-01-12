@@ -21,4 +21,10 @@ codeunit 71179876 EmptyEventNTSTM implements INtfyEventNTSTM
     begin
 
     end;
+
+    procedure FilterNtfyEntriesBeforeBatchSend(var NtfyEntry: Record NtfyEntryNTSTM; Params: Dictionary of [Text, Text]);
+    begin
+
+    end;
+
 }

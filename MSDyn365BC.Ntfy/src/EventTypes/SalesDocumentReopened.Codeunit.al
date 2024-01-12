@@ -27,6 +27,11 @@ codeunit 71179878 SalesDocumentReopenedNTSTM implements INtfyEventNTSTM
         NtfyEntry.Modify(true);
     end;
 
+    procedure FilterNtfyEntriesBeforeBatchSend(var NtfyEntry: Record NtfyEntryNTSTM; Params: Dictionary of [Text, Text]);
+    begin
+
+    end;
+
     procedure DoCallNtfyEntry(NtfyEntry: Record NtfyEntryNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Boolean
     var
         FilterSalesHeader: Record "Sales Header";

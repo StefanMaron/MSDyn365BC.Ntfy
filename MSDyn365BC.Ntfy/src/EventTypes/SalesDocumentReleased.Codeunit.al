@@ -27,6 +27,11 @@ codeunit 71179877 SalesDocumentReleasedNTSTM implements INtfyEventNTSTM
         NtfyEntry.Modify(true);
     end;
 
+    procedure FilterNtfyEntriesBeforeBatchSend(var NtfyEntry: Record NtfyEntryNTSTM; Params: Dictionary of [Text, Text]);
+    begin
+
+    end;
+
     procedure DoCallNtfyEntry(NtfyEntry: Record NtfyEntryNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Boolean
     var
         FilterSalesHeader: Record "Sales Header";
@@ -56,5 +61,4 @@ codeunit 71179877 SalesDocumentReleasedNTSTM implements INtfyEventNTSTM
         Params.Add('No', SalesHeader."No.");
         NtfyEntry.SendNotifications(NtfyEntry.EventType::SalesDocumentReleased, Params);
     end;
-
 }
