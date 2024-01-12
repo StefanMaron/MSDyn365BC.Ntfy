@@ -49,6 +49,19 @@ page 71179875 NtfyEntryNTSTM
                     Rec.SetSettingsTroughInterface();
                 end;
             }
+            action(ResetSettings)
+            {
+                ApplicationArea = All;
+                Caption = 'Reset Settings';
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Restore;
+
+                trigger OnAction()
+                begin
+                    Rec.ResetSettingsTroughInterface();
+                end;
+            }
         }
     }
 

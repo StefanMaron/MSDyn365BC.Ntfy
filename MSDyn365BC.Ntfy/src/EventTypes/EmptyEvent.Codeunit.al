@@ -17,4 +17,8 @@ codeunit 71179876 EmptyEventNTSTM implements INtfyEventNTSTM
 
     end;
 
+    procedure ResetSettings(NtfyEntry: Record NtfyEntryNTSTM);
+    begin
+
+    end;
 }

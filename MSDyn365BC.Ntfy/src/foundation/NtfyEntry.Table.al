@@ -58,6 +58,14 @@ table 71179875 NtfyEntryNTSTM
         INtfyEvent.SetSettings(Rec);
     end;
 
+    procedure ResetSettingsTroughInterface()
+    var
+        INtfyEvent: Interface INtfyEventNTSTM;
+    begin
+        INtfyEvent := Rec.EventType;
+        INtfyEvent.ResetSettings(Rec);
+    end;
+
     procedure RunBatch()
     var
         TempSessionId: Integer;
