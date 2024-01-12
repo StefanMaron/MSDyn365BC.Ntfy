@@ -22,6 +22,12 @@
       "name": "Any",
       "id": "e7320ebb-08b3-4406-b1ec-b4927d3e280b",
       "version": "22.0.0.0"
+    },
+    {
+      "id": "57aaf99d-c3f2-4d57-96fb-2363ff53666b",
+      "name": "MSDyn365BC.Ntfy",
+      "publisher": "Stefan Maron Consulting",
+      "version": "1.0.0.0"
     }
   ],
   "screenshots": [],

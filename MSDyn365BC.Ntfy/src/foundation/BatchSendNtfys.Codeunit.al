@@ -8,15 +8,20 @@ codeunit 71179879 BatchSendNtfysNTSTM
 
     trigger OnRun()
     var
-        RestClient: Codeunit "Rest Client";
+        RestWrapper: Codeunit RestWrapperNTSTM;
+    begin
+        SendRequests(Rec, RestWrapper);
+    end;
+
+    internal procedure SendRequests(var Rec: Record NtfyEntryNTSTM; IRestWrapper: Interface IRestWrapperNTSTM)
+    var
         Body: Codeunit "Http Content";
     begin
-        Body.Create(Rec.NtfyMessage);
+        Body := IRestWrapper.CreateBody(Rec.NtfyMessage);
 
         if Rec.FindSet() then
             repeat
-                Clear(RestClient);
-                RestClient.Post(StrSubstNo('https://ntfy.sh/%1', Rec.NtfyTopic), Body);
+                IRestWrapper.Post(StrSubstNo('https://ntfy.sh/%1', Rec.NtfyTopic), Body);
             until Rec.Next() = 0;
     end;
 }

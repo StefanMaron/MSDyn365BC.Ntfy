@@ -15,6 +15,13 @@
   "screenshots": [],
   "platform": "1.0.0.0",
   "application": "22.0.0.0",
+  "internalsVisibleTo": [
+    {
+      "id": "ae87fcc8-d66a-40c9-928e-efc6e9f7f2df",
+      "name": "MSDyn365BC.Ntfy.Test",
+      "publisher": "Stefan Maron Consulting"
+    }
+  ],
   "idRanges": [
     {
       "from": 71179875,
@@ -30,7 +37,7 @@
   ],
   "resourceExposurePolicy": {
     "allowDebugging": true,
-    "allowDownloadingSource": false,
-    "includeSourceInSymbolFile": false
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
   }
 }
