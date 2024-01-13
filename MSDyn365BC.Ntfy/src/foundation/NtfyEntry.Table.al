@@ -7,6 +7,8 @@ table 71179875 NtfyEntryNTSTM
     DataClassification = CustomerContent;
     DrillDownPageId = NtfyEntryNTSTM;
     LookupPageId = NtfyEntryNTSTM;
+    InherentEntitlements = RIMDX;
+    InherentPermissions = RIMDX;
 
     fields
     {
@@ -33,11 +35,13 @@ table 71179875 NtfyEntryNTSTM
         field(5; NtfyTitle; Text[150])
         {
             Caption = 'Title';
+            AllowInCustomizations = Never;
             //Temporary user only
         }
         field(6; NtfyMessage; Text[2048])
         {
             Caption = 'Message';
+            AllowInCustomizations = Never;
             //Temporary user only
         }
     }
@@ -76,24 +80,26 @@ table 71179875 NtfyEntryNTSTM
 
     procedure SendNotifications(Type: Enum EventTypeNTSTM; Params: Dictionary of [Text, Text])
     var
-        NtfyEntry: Record NtfyEntryNTSTM;
-        INtfyEvent: Interface INtfyEventNTSTM;
+        RunBatchWrapper: Codeunit RunBatchWrapperNTSTM;
     begin
-        INtfyEvent := Type;
+        SendNotifications(Type, Type, Params, RunBatchWrapper);
+    end;
 
-        NtfyEntry.SetRange(EventType, Type);
-        NtfyEntry.SetFilter(NtfyTopic, '<>%1', '');
-        INtfyEvent.FilterNtfyEntriesBeforeBatchSend(NtfyEntry, Params);
-        if NtfyEntry.FindSet() then
+    internal procedure SendNotifications(INtfyEvent: Interface INtfyEventNTSTM; Type: Enum EventTypeNTSTM; Params: Dictionary of [Text, Text]; RunBatchWrapper: Interface IRunBatchNTSTM)
+    begin
+        Rec.SetRange(EventType, Type);
+        Rec.SetFilter(NtfyTopic, '<>%1', '');
+        INtfyEvent.FilterNtfyEntriesBeforeBatchSend(Rec, Params);
+        if Rec.FindSet() then
             repeat
-                if INtfyEvent.DoCallNtfyEntry(NtfyEntry, Params) then
-                    NtfyEntry.Mark(true);
-            until NtfyEntry.Next() = 0;
+                if INtfyEvent.DoCallNtfyEntry(Rec, Params) then
+                    Rec.Mark(true);
+            until Rec.Next() = 0;
 
-        NtfyEntry.NtfyMessage := INtfyEvent.GetMessage(Params);
+        Rec.NtfyMessage := INtfyEvent.GetMessage(Params);
 
-        NtfyEntry.MarkedOnly(true);
-        NtfyEntry.RunBatch();
+        Rec.MarkedOnly(true);
 
+        RunBatchWrapper.RunBatch(Rec);
     end;
 }
