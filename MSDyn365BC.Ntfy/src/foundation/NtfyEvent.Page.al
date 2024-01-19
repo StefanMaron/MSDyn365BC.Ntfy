@@ -1,8 +1,8 @@
 namespace StefanMaron.Ntfy;
 using StefanMaron.Ntfy;
-page 71179875 NtfyEventNTSTM
+page 71179875 NtfyEventsNTSTM
 {
-    Caption = 'Ntfy Event';
+    Caption = 'Ntfy Events';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Administration;

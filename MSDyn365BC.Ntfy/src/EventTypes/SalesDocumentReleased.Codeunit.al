@@ -21,13 +21,13 @@ codeunit 71179877 SalesDocumentReleasedNTSTM implements INtfyEventNTSTM
         end;
     end;
 
-    procedure ResetSettings(NtfyEvent: Record NtfyEventNTSTM);
+    procedure ResetSettings(NtfyEvent: Record NtfyEventNTSTM)
     begin
         NtfyEvent.Validate(FilterText, '');
         NtfyEvent.Modify(true);
     end;
 
-    procedure FilterNtfyEntriesBeforeBatchSend(var NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]);
+    procedure FilterNtfyEntriesBeforeBatchSend(var NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text])
     begin
 
     end;
@@ -45,7 +45,7 @@ codeunit 71179877 SalesDocumentReleasedNTSTM implements INtfyEventNTSTM
         end;
     end;
 
-    procedure GetMessage(Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
+    procedure GetMessage(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
     begin
         exit(StrSubstNo('Sales %1 - %2 - has been released', Params.Get('DocumentType'), Params.Get('No')));
     end;

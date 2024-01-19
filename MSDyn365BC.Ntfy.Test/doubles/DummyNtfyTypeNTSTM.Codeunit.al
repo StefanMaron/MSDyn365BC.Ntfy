@@ -25,9 +25,10 @@ codeunit 50006 DummyNtfyTypeNTSTM implements INtfyEventNTSTM
     procedure DoCallNtfyEvent(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Boolean;
     begin
         DoCallNtfyEventWasCalled := true;
+        exit(true);
     end;
 
-    procedure GetMessage(Params: Dictionary of [Text, Text]) ReturnValue: Text[2048];
+    procedure GetMessage(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[2048];
     begin
         GetMessageWasCalled := true;
     end;

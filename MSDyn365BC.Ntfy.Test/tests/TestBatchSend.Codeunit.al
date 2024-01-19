@@ -8,14 +8,14 @@ codeunit 50000 "TestBatchSend"
     [Test]
     procedure TestCreateBodyGetsCalled()
     var
-        NtfyEvent: Record NtfyEventNTSTM temporary;
+        NtfyEventRequest: Record NtfyEventRequestNTSTM;
         BatchSend: Codeunit BatchSendNtfysNTSTM;
         RestWrapper: Codeunit RestWrapperTestBodyNTSTM;
     begin
-        NtfyEvent.Init();
-        NtfyEvent.NtfyMessage := 'Hello World';
-        if not NtfyEvent.Insert() then;
-        asserterror BatchSend.SendRequests(NtfyEvent, RestWrapper);
+        NtfyEventRequest.Init();
+        NtfyEventRequest.NtfyMessage := 'Hello World';
+        if not NtfyEventRequest.Insert() then;
+        asserterror BatchSend.SendRequests(NtfyEventRequest, RestWrapper);
 
         Assert.ExpectedError('CreateBody was called');
     end;
@@ -23,29 +23,29 @@ codeunit 50000 "TestBatchSend"
     [Test]
     procedure TestPostGetsCalled()
     var
-        NtfyEvent: Record NtfyEventNTSTM temporary;
+        NtfyEventRequest: Record NtfyEventRequestNTSTM;
         BatchSend: Codeunit BatchSendNtfysNTSTM;
         RestWrapper: Codeunit RestWrapperTestPostNTSTM;
     begin
-        NtfyEvent.Init();
-        NtfyEvent.NtfyMessage := 'Hello World';
-        if not NtfyEvent.Insert() then;
-        asserterror BatchSend.SendRequests(NtfyEvent, RestWrapper);
+        NtfyEventRequest.Init();
+        NtfyEventRequest.NtfyMessage := 'Hello World';
+        if not NtfyEventRequest.Insert() then;
+        asserterror BatchSend.SendRequests(NtfyEventRequest, RestWrapper);
 
-        Assert.ExpectedError(StrSubstNo('Post was called with RequestUri: %1', StrSubstNo('https://ntfy.sh/%1', NtfyEvent.NtfyTopic)));
+        Assert.ExpectedError(StrSubstNo('Post was called with RequestUri: %1', StrSubstNo('https://ntfy.sh/%1', NtfyEventRequest.NtfyTopic)));
     end;
 
     [Test]
     procedure TestBodyGetsPassedToPostCorrectly()
     var
-        NtfyEvent: Record NtfyEventNTSTM temporary;
+        NtfyEventRequest: Record NtfyEventRequestNTSTM;
         BatchSend: Codeunit BatchSendNtfysNTSTM;
         RestWrapper: Codeunit RestWrapBodyPassNTSTM;
     begin
-        NtfyEvent.Init();
-        NtfyEvent.NtfyMessage := 'Hello World';
-        if not NtfyEvent.Insert() then;
-        BatchSend.SendRequests(NtfyEvent, RestWrapper);
+        NtfyEventRequest.Init();
+        NtfyEventRequest.NtfyMessage := 'Hello World';
+        if not NtfyEventRequest.Insert() then;
+        BatchSend.SendRequests(NtfyEventRequest, RestWrapper);
     end;
 
 

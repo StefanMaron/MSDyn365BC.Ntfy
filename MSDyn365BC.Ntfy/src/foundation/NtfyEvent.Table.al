@@ -5,8 +5,8 @@ using System.Security.AccessControl;
 table 71179875 NtfyEventNTSTM
 {
     DataClassification = CustomerContent;
-    DrillDownPageId = NtfyEventNTSTM;
-    LookupPageId = NtfyEventNTSTM;
+    DrillDownPageId = NtfyEventsNTSTM;
+    LookupPageId = NtfyEventsNTSTM;
     InherentEntitlements = RIMDX;
     InherentPermissions = RIMDX;
 
@@ -70,14 +70,6 @@ table 71179875 NtfyEventNTSTM
         INtfyEvent.ResetSettings(Rec);
     end;
 
-    procedure RunBatch()
-    var
-        TempSessionId: Integer;
-    begin
-        if not StartSession(TempSessionId, Codeunit::BatchSendNtfysNTSTM, CompanyName, Rec) then
-            Codeunit.Run(Codeunit::BatchSendNtfysNTSTM, Rec);
-    end;
-
     procedure SendNotifications(Type: Enum EventTypeNTSTM; Params: Dictionary of [Text, Text])
     var
         RunBatchWrapper: Codeunit RunBatchWrapperNTSTM;
@@ -86,20 +78,25 @@ table 71179875 NtfyEventNTSTM
     end;
 
     internal procedure SendNotifications(INtfyEvent: Interface INtfyEventNTSTM; Type: Enum EventTypeNTSTM; Params: Dictionary of [Text, Text]; RunBatchWrapper: Interface IRunBatchNTSTM)
+    var
+        NtfyEventRequest: Record NtfyEventRequestNTSTM;
     begin
         Rec.SetRange(EventType, Type);
         Rec.SetFilter(NtfyTopic, '<>%1', '');
         INtfyEvent.FilterNtfyEntriesBeforeBatchSend(Rec, Params);
         if Rec.FindSet() then
             repeat
-                if INtfyEvent.DoCallNtfyEvent(Rec, Params) then
-                    Rec.Mark(true);
+                if INtfyEvent.DoCallNtfyEvent(Rec, Params) then begin
+                    NtfyEventRequest.Init();
+                    NtfyEventRequest.EntryNo += 1;
+                    NtfyEventRequest.NtfyTopic := Rec.NtfyTopic;
+                    // NtfyEventRequest.NtfyTitle := INtfyEvent.GetTitle(Params);
+                    NtfyEventRequest.NtfyMessage := INtfyEvent.GetMessage(Rec, Params);
+                    NtfyEventRequest.Insert(true);
+                end;
             until Rec.Next() = 0;
 
-        Rec.NtfyMessage := INtfyEvent.GetMessage(Params);
 
-        Rec.MarkedOnly(true);
-
-        RunBatchWrapper.RunBatch(Rec);
+        RunBatchWrapper.RunBatch(NtfyEventRequest);
     end;
 }

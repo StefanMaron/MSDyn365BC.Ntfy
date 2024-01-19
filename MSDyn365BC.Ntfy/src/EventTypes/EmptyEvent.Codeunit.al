@@ -12,17 +12,17 @@ codeunit 71179876 EmptyEventNTSTM implements INtfyEventNTSTM
 
     end;
 
-    procedure GetMessage(Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
+    procedure GetMessage(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
     begin
 
     end;
 
-    procedure ResetSettings(NtfyEvent: Record NtfyEventNTSTM);
+    procedure ResetSettings(NtfyEvent: Record NtfyEventNTSTM)
     begin
 
     end;
 
-    procedure FilterNtfyEntriesBeforeBatchSend(var NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]);
+    procedure FilterNtfyEntriesBeforeBatchSend(var NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text])
     begin
 
     end;

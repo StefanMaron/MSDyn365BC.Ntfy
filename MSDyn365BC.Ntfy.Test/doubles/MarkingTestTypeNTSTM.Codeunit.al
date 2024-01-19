@@ -20,7 +20,7 @@ codeunit 50008 MarkingTestTypeNTSTM implements INtfyEventNTSTM
         Evaluate(ReturnValue, NtfyEvent.NtfyMessage);
     end;
 
-    procedure GetMessage(Params: Dictionary of [Text, Text]) ReturnValue: Text[2048];
+    procedure GetMessage(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[2048];
     begin
 
     end;

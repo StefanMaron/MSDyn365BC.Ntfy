@@ -4,7 +4,7 @@ using System.RestClient;
 
 codeunit 71179879 BatchSendNtfysNTSTM
 {
-    TableNo = NtfyEventNTSTM;
+    TableNo = NtfyEventRequestNTSTM;
 
     trigger OnRun()
     var
@@ -13,7 +13,7 @@ codeunit 71179879 BatchSendNtfysNTSTM
         SendRequests(Rec, RestWrapper);
     end;
 
-    internal procedure SendRequests(var Rec: Record NtfyEventNTSTM; IRestWrapper: Interface IRestWrapperNTSTM)
+    internal procedure SendRequests(var Rec: Record NtfyEventRequestNTSTM; IRestWrapper: Interface IRestWrapperNTSTM)
     var
         Body: Codeunit "Http Content";
     begin

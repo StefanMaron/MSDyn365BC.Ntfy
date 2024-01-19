@@ -45,7 +45,7 @@ codeunit 71179878 SalesDocumentReopenedNTSTM implements INtfyEventNTSTM
         end;
     end;
 
-    procedure GetMessage(Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
+    procedure GetMessage(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
     begin
         exit(StrSubstNo('Sales %1 - %2 - has been reopened', Params.Get('DocumentType'), Params.Get('No')));
     end;
