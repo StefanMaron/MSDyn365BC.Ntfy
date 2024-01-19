@@ -1,13 +1,13 @@
 namespace StefanMaron.Ntfy;
 using StefanMaron.Ntfy;
-page 71179875 NtfyEntryNTSTM
+page 71179875 NtfyEventNTSTM
 {
-    Caption = 'Ntfy Entry';
+    Caption = 'Ntfy Event';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Administration;
     DelayedInsert = true;
-    SourceTable = NtfyEntryNTSTM;
+    SourceTable = NtfyEventNTSTM;
     PopulateAllFields = true;
 
     layout

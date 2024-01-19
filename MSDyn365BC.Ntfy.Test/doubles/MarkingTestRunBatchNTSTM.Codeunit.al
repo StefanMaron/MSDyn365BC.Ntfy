@@ -2,7 +2,7 @@ codeunit 50009 MarkingTestRunBatchNTSTM implements IRunBatchNTSTM
 {
 
 
-    procedure RunBatch(var Rec: Record NtfyEntryNTSTM)
+    procedure RunBatch(var Rec: Record NtfyEventNTSTM)
     var
         Assert: Codeunit "Library Assert";
     begin

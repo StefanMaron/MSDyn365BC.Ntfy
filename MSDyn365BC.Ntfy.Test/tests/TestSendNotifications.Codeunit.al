@@ -8,20 +8,20 @@ codeunit 50004 "TestSendNotifications"
     [Test]
     procedure TestIfFunctionsGetCalled()
     var
-        NtfyEntry: Record NtfyEntryNTSTM temporary;
+        NtfyEvent: Record NtfyEventNTSTM temporary;
         Params: Dictionary of [Text, Text];
         RunBatchWrapperEmpty: Codeunit RunBatchWrapperEmptyNTSTM;
         DummyNtfyType: Codeunit DummyNtfyTypeNTSTM;
     begin
-        NtfyEntry.Init();
-        NtfyEntry.NtfyMessage := 'Hello World';
-        NtfyEntry.NtfyTopic := 'Hello World';
-        NtfyEntry.EventType := NtfyEntry.EventType::DummyNtfyType;
-        if not NtfyEntry.Insert() then;
-        NtfyEntry.SendNotifications(DummyNtfyType, NtfyEntry.EventType::DummyNtfyType, Params, RunBatchWrapperEmpty);
+        NtfyEvent.Init();
+        NtfyEvent.NtfyMessage := 'Hello World';
+        NtfyEvent.NtfyTopic := 'Hello World';
+        NtfyEvent.EventType := NtfyEvent.EventType::DummyNtfyType;
+        if not NtfyEvent.Insert() then;
+        NtfyEvent.SendNotifications(DummyNtfyType, NtfyEvent.EventType::DummyNtfyType, Params, RunBatchWrapperEmpty);
 
         Assert.IsTrue(DummyNtfyType.GetFilterNtfyEntriesBeforeBatchSendWasCalled(), 'FilterNtfyEntriesBeforeBatchSend was not called');
-        Assert.IsTrue(DummyNtfyType.GetDoCallNtfyEntryWasCalled(), 'DoCallNtfyEntry was not called');
+        Assert.IsTrue(DummyNtfyType.GetDoCallNtfyEventWasCalled(), 'DoCallNtfyEvent was not called');
         Assert.IsTrue(DummyNtfyType.GetGetMessageWasCalled(), 'GetMessage was not called');
         Assert.IsTrue(RunBatchWrapperEmpty.GetRunBatchWasCalled(), 'RunBatch was not called');
     end;
@@ -29,23 +29,23 @@ codeunit 50004 "TestSendNotifications"
     [Test]
     procedure TestIfMarkingWorks()
     var
-        NtfyEntry: Record NtfyEntryNTSTM temporary;
+        NtfyEvent: Record NtfyEventNTSTM temporary;
         Params: Dictionary of [Text, Text];
         MarkingTestRunBatch: Codeunit MarkingTestRunBatchNTSTM;
         MarkingTestType: Codeunit MarkingTestTypeNTSTM;
     begin
-        NtfyEntry.Init();
-        NtfyEntry.NtfyMessage := 'true';
-        NtfyEntry.NtfyTopic := 'true';
-        NtfyEntry.EventType := NtfyEntry.EventType::DummyNtfyType;
-        if not NtfyEntry.Insert() then;
-        NtfyEntry.Init();
-        NtfyEntry.NtfyMessage := 'false';
-        NtfyEntry.NtfyTopic := 'false';
-        NtfyEntry.EventType := NtfyEntry.EventType::DummyNtfyType;
-        if not NtfyEntry.Insert() then;
+        NtfyEvent.Init();
+        NtfyEvent.NtfyMessage := 'true';
+        NtfyEvent.NtfyTopic := 'true';
+        NtfyEvent.EventType := NtfyEvent.EventType::DummyNtfyType;
+        if not NtfyEvent.Insert() then;
+        NtfyEvent.Init();
+        NtfyEvent.NtfyMessage := 'false';
+        NtfyEvent.NtfyTopic := 'false';
+        NtfyEvent.EventType := NtfyEvent.EventType::DummyNtfyType;
+        if not NtfyEvent.Insert() then;
 
-        NtfyEntry.SendNotifications(MarkingTestType, NtfyEntry.EventType::DummyNtfyType, Params, MarkingTestRunBatch);
+        NtfyEvent.SendNotifications(MarkingTestType, NtfyEvent.EventType::DummyNtfyType, Params, MarkingTestRunBatch);
     end;
 }
 

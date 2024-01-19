@@ -1,4 +1,4 @@
 interface IRunBatchNTSTM
 {
-    procedure RunBatch(var Rec: Record NtfyEntryNTSTM)
+    procedure RunBatch(var Rec: Record NtfyEventNTSTM)
 }

@@ -2,11 +2,11 @@ namespace StefanMaron.Ntfy;
 using System.Security.AccessControl;
 
 
-table 71179875 NtfyEntryNTSTM
+table 71179875 NtfyEventNTSTM
 {
     DataClassification = CustomerContent;
-    DrillDownPageId = NtfyEntryNTSTM;
-    LookupPageId = NtfyEntryNTSTM;
+    DrillDownPageId = NtfyEventNTSTM;
+    LookupPageId = NtfyEventNTSTM;
     InherentEntitlements = RIMDX;
     InherentPermissions = RIMDX;
 
@@ -92,7 +92,7 @@ table 71179875 NtfyEntryNTSTM
         INtfyEvent.FilterNtfyEntriesBeforeBatchSend(Rec, Params);
         if Rec.FindSet() then
             repeat
-                if INtfyEvent.DoCallNtfyEntry(Rec, Params) then
+                if INtfyEvent.DoCallNtfyEvent(Rec, Params) then
                     Rec.Mark(true);
             until Rec.Next() = 0;
 

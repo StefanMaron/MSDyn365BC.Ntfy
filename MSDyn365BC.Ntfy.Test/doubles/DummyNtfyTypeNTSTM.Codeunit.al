@@ -4,27 +4,27 @@ codeunit 50006 DummyNtfyTypeNTSTM implements INtfyEventNTSTM
         SetSettingsWasCalled: Boolean;
         ResetSettingsWasCalled: Boolean;
         FilterNtfyEntriesBeforeBatchSendWasCalled: Boolean;
-        DoCallNtfyEntryWasCalled: Boolean;
+        DoCallNtfyEventWasCalled: Boolean;
         GetMessageWasCalled: Boolean;
 
-    procedure SetSettings(NtfyEntry: Record NtfyEntryNTSTM);
+    procedure SetSettings(NtfyEvent: Record NtfyEventNTSTM);
     begin
         SetSettingsWasCalled := true;
     end;
 
-    procedure ResetSettings(NtfyEntry: Record NtfyEntryNTSTM);
+    procedure ResetSettings(NtfyEvent: Record NtfyEventNTSTM);
     begin
         ResetSettingsWasCalled := true;
     end;
 
-    procedure FilterNtfyEntriesBeforeBatchSend(var NtfyEntry: Record NtfyEntryNTSTM; Params: Dictionary of [Text, Text]);
+    procedure FilterNtfyEntriesBeforeBatchSend(var NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]);
     begin
         FilterNtfyEntriesBeforeBatchSendWasCalled := true;
     end;
 
-    procedure DoCallNtfyEntry(NtfyEntry: Record NtfyEntryNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Boolean;
+    procedure DoCallNtfyEvent(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Boolean;
     begin
-        DoCallNtfyEntryWasCalled := true;
+        DoCallNtfyEventWasCalled := true;
     end;
 
     procedure GetMessage(Params: Dictionary of [Text, Text]) ReturnValue: Text[2048];
@@ -47,9 +47,9 @@ codeunit 50006 DummyNtfyTypeNTSTM implements INtfyEventNTSTM
         exit(FilterNtfyEntriesBeforeBatchSendWasCalled);
     end;
 
-    procedure GetDoCallNtfyEntryWasCalled(): Boolean;
+    procedure GetDoCallNtfyEventWasCalled(): Boolean;
     begin
-        exit(DoCallNtfyEntryWasCalled);
+        exit(DoCallNtfyEventWasCalled);
     end;
 
     procedure GetGetMessageWasCalled(): Boolean;
