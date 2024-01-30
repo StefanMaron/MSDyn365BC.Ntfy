@@ -14,7 +14,7 @@ codeunit 50004 "TestSendNotifications"
         DummyNtfyType: Codeunit DummyNtfyTypeNTSTM;
     begin
         NtfyEvent.Init();
-        NtfyEvent.NtfyMessage := 'Hello World';
+        // NtfyEvent.NtfyMessage := 'Hello World'; //fixme
         NtfyEvent.NtfyTopic := 'Hello World';
         NtfyEvent.EventType := NtfyEvent.EventType::DummyNtfyType;
         if not NtfyEvent.Insert() then;
@@ -35,12 +35,12 @@ codeunit 50004 "TestSendNotifications"
         MarkingTestType: Codeunit MarkingTestTypeNTSTM;
     begin
         NtfyEvent.Init();
-        NtfyEvent.NtfyMessage := 'true';
+        // NtfyEvent.NtfyMessage := 'true'; //fixme
         NtfyEvent.NtfyTopic := 'true';
         NtfyEvent.EventType := NtfyEvent.EventType::DummyNtfyType;
         if not NtfyEvent.Insert() then;
         NtfyEvent.Init();
-        NtfyEvent.NtfyMessage := 'false';
+        // NtfyEvent.NtfyMessage := 'false'; //fixme
         NtfyEvent.NtfyTopic := 'false';
         NtfyEvent.EventType := NtfyEvent.EventType::DummyNtfyType;
         if not NtfyEvent.Insert() then;

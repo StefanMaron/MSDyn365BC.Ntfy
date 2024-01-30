@@ -32,18 +32,6 @@ table 71179875 NtfyEventNTSTM
             AllowInCustomizations = Never;
             Caption = 'Filter Text';
         }
-        field(5; NtfyTitle; Text[150])
-        {
-            Caption = 'Title';
-            AllowInCustomizations = Never;
-            //Temporary user only
-        }
-        field(6; NtfyMessage; Text[2048])
-        {
-            Caption = 'Message';
-            AllowInCustomizations = Never;
-            //Temporary user only
-        }
     }
 
     keys

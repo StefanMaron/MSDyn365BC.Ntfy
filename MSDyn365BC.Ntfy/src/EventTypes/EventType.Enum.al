@@ -20,4 +20,9 @@ enum 71179875 EventTypeNTSTM implements INtfyEventNTSTM
         Caption = 'Sales document released';
         Implementation = INtfyEventNTSTM = SalesDocumentReleasedNTSTM;
     }
+    value(3; ReportFinishedProcessing)
+    {
+        Caption = 'Report finished processing';
+        Implementation = INtfyEventNTSTM = ReportFinishedProcessingNTSTM;
+    }
 }
