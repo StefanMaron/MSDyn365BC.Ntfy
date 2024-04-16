@@ -12,12 +12,12 @@ codeunit 50008 MarkingTestTypeNTSTM implements INtfyEventNTSTM
 
     procedure FilterNtfyEntriesBeforeBatchSend(var NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]);
     begin
-
+        NtfyEvent.SetRange(NtfyTopic, 'true');
     end;
 
     procedure DoCallNtfyEvent(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Boolean;
     begin
-        // Evaluate(ReturnValue, NtfyEvent.NtfyMessage); //fixme
+        exit(true);
     end;
 
     procedure GetMessage(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[2048];
