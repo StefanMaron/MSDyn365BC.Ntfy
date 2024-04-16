@@ -16,6 +16,7 @@
       "Ntfy",
       "Ntfys",
       "NTSTM"
-    ]
+    ],
+    "al.rootNamespace": "StefanMaron.Ntfy",
   }
 }

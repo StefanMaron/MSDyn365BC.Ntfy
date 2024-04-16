@@ -25,4 +25,9 @@ enum 71179875 EventTypeNTSTM implements INtfyEventNTSTM
         Caption = 'Report finished processing';
         Implementation = INtfyEventNTSTM = ReportFinishedProcessingNTSTM;
     }
+    value(4; ApprovalRequested)
+    {
+        Caption = 'Approval requested';
+        Implementation = INtfyEventNTSTM = ApprovalRequestedNTSTM;
+    }
 }

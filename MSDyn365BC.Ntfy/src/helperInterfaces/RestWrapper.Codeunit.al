@@ -9,6 +9,7 @@ codeunit 71179880 RestWrapperNTSTM implements IRestWrapperNTSTM
     var
         RestClient: Codeunit "Rest Client";
     begin
+        RestClient.SetDefaultRequestHeader('Markdown', 'yes');
         exit(RestClient.Post(RequestUri, Content));
     end;
 }
