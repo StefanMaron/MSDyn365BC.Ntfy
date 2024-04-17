@@ -46,7 +46,8 @@ codeunit 71179883 ReportFinishedProcessingNTSTM implements INtfyEventNTSTM
         end;
     end;
 
-    procedure GetMessage(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
+
+    procedure GetTitle(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[150]
     var
         AllObjWithCaption: Record AllObjWithCaption;
         ReportCaption: Text[249];
@@ -61,7 +62,9 @@ codeunit 71179883 ReportFinishedProcessingNTSTM implements INtfyEventNTSTM
         exit(StrSubstNo(ReportFinishedLbl, ReportCaption, Params.Get('ReportID')));
     end;
 
-
+    procedure GetMessage(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
+    begin
+    end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::ReportManagement, OnAfterDocumentReady, '', false, false)]
     local procedure SentNtfyOnAfterReleaseSalesDoc(ObjectID: Integer; var Success: Boolean)

@@ -15,6 +15,11 @@ codeunit 71179876 EmptyEventNTSTM implements INtfyEventNTSTM
 
     end;
 
+    procedure GetTitle(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[150]
+    begin
+
+    end;
+
     procedure GetMessage(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
     begin
 
@@ -29,5 +34,4 @@ codeunit 71179876 EmptyEventNTSTM implements INtfyEventNTSTM
     begin
 
     end;
-
 }

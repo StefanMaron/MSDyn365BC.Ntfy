@@ -76,10 +76,12 @@ table 71179875 NtfyEventNTSTM
             repeat
                 if INtfyEvent.DoCallNtfyEvent(Rec, Params) then begin
                     NtfyEventRequest.Init();
-                    NtfyEventRequest.EntryNo += 1;
-                    NtfyEventRequest.NtfyTopic := Rec.NtfyTopic;
-                    // NtfyEventRequest.NtfyTitle := INtfyEvent.GetTitle(Params);
-                    NtfyEventRequest.NtfyMessage := INtfyEvent.GetMessage(Rec, Params);
+                    NtfyEventRequest.Validate(EntryNo, NtfyEventRequest.EntryNo + 1);
+                    NtfyEventRequest.Validate(NtfyTopic, Rec.NtfyTopic);
+                    NtfyEventRequest.Validate(NtfyTitle, INtfyEvent.GetTitle(Rec, Params));
+                    NtfyEventRequest.Validate(NtfyMessage, INtfyEvent.GetMessage(Rec, Params));
+                    if NtfyEventRequest.NtfyMessage = '' then
+                        NtfyEventRequest.Validate(NtfyMessage, '<empty>');
                     NtfyEventRequest.Insert(true);
                 end;
             until Rec.Next() = 0;

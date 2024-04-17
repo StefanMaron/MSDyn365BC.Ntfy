@@ -40,6 +40,7 @@ table 71179877 NtfyEventRequestNTSTM
     var
         TempSessionId: Integer;
     begin
+        //TODO: Handle System app Web request allow for sandboxes
         if not StartSession(TempSessionId, Codeunit::BatchSendNtfysNTSTM, CompanyName, Rec) then
             Codeunit.Run(Codeunit::BatchSendNtfysNTSTM, Rec);
     end;

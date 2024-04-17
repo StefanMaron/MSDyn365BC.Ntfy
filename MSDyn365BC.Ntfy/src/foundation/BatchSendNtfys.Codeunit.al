@@ -23,6 +23,7 @@ codeunit 71179879 BatchSendNtfysNTSTM
 
         if Rec.FindSet() then
             repeat
+                IRestWrapper.SetDefaultRequestHeader('Title', Rec.NtfyTitle);
                 IRestWrapper.Post(StrSubstNo('https://ntfy.sh/%1', Rec.NtfyTopic), Body);
             until Rec.Next() = 0;
     end;

@@ -1,5 +1,6 @@
 namespace StefanMaron.Ntfy;
 using Microsoft.Sales.Document;
+using Microsoft.Utilities;
 
 codeunit 71179877 SalesDocumentReleasedNTSTM implements INtfyEventNTSTM
 {
@@ -46,9 +47,20 @@ codeunit 71179877 SalesDocumentReleasedNTSTM implements INtfyEventNTSTM
         end;
     end;
 
-    procedure GetMessage(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
+    procedure GetTitle(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[150]
     begin
         exit(StrSubstNo('Sales %1 - %2 - has been released', Params.Get('DocumentType'), Params.Get('No')));
+    end;
+
+    procedure GetMessage(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
+    var
+        SalesHeader: Record "Sales Header";
+        PageMgt: Codeunit "Page Management";
+    begin
+        if not SalesHeader.GetBySystemId(Params.Get('SystemID')) then
+            exit('Page Link could not be generated. Sales Header not found.');
+
+        exit(StrSubstNo('[Open Sales %1 - %2](%3)', Params.Get('DocumentType'), Params.Get('No'), GetUrl(ClientType::Web, CompanyName, ObjectType::Page, PageMgt.GetPageID(SalesHeader), SalesHeader, true)));
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Release Sales Document", OnAfterReleaseSalesDoc, '', false, false)]

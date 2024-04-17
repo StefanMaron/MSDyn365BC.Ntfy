@@ -1,8 +1,9 @@
 namespace StefanMaron.Ntfy;
 
 using System.Automation;
+using System.Threading;
 
-codeunit 71179884 ApprovalRequestedNTSTM implements INtfyEventNTSTM
+codeunit 71179885 JobQueueFailedNTSTM implements INtfyEventNTSTM
 {
     InherentEntitlements = X;
     InherentPermissions = X;
@@ -11,14 +12,14 @@ codeunit 71179884 ApprovalRequestedNTSTM implements INtfyEventNTSTM
     var
         FilterPageBuilder: FilterPageBuilder;
     begin
-        FilterPageBuilder.AddTable('Approval Entry', Database::"Approval Entry");
+        FilterPageBuilder.AddTable('Job Queue Entry', Database::"Job Queue Entry");
         if NtfyEvent.FilterText <> '' then
-            FilterPageBuilder.SetView('Approval Entry', NtfyEvent.FilterText);
+            FilterPageBuilder.SetView('Job Queue Entry', NtfyEvent.FilterText);
         if FilterPageBuilder.RunModal() then begin
-            if not FilterPageBuilder.GetView('Approval Entry').Contains('WHERE') then
+            if not FilterPageBuilder.GetView('Job Queue Entry').Contains('WHERE') then
                 NtfyEvent.Validate(FilterText, '')
             else
-                NtfyEvent.Validate(FilterText, FilterPageBuilder.GetView('Approval Entry'));
+                NtfyEvent.Validate(FilterText, FilterPageBuilder.GetView('Job Queue Entry'));
             NtfyEvent.Modify(true);
         end;
     end;
@@ -31,7 +32,6 @@ codeunit 71179884 ApprovalRequestedNTSTM implements INtfyEventNTSTM
 
     procedure FilterNtfyEntriesBeforeBatchSend(var NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]);
     begin
-        NtfyEvent.SetRange(UserName, Params.Get('ApproverID'));
     end;
 
     procedure DoCallNtfyEvent(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Boolean
@@ -41,23 +41,25 @@ codeunit 71179884 ApprovalRequestedNTSTM implements INtfyEventNTSTM
 
     procedure GetTitle(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[150]
     begin
-        exit(StrSubstNo('%1 | Pending Approval [Go to Approval List](%2)', Params.Get('RecordID'), GetUrl(ClientType::Web, CompanyName, ObjectType::Page, Page::"Requests to Approve")));
+        exit(StrSubstNo('Job queue for %1 %2 failed', Params.Get('ObjectType'), Params.Get('ObjectID')));
     end;
 
     procedure GetMessage(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[2048]
     begin
+        exit(Params.Get('Error Message'));
     end;
 
-    [EventSubscriber(ObjectType::Table, Database::"Approval Entry", OnAfterInsertEvent, '', false, false)]
-    local procedure SentNtfyOnAfterReopenSalesDoc(var Rec: Record "Approval Entry")
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Job Queue Error Handler", OnAfterLogError, '', false, false)]
+    local procedure SentNtfyOnAfterReopenSalesDoc(var JobQueueEntry: Record "Job Queue Entry")
     var
         NtfyEvent: Record NtfyEventNTSTM;
         Params: Dictionary of [Text, Text];
     begin
-        if not (Rec.Status in [Rec.Status::Open, Rec.Status::Created]) then exit;
+        if not (JobQueueEntry.Status in [JobQueueEntry.Status::Error]) then exit;
 
-        Params.Add('ApproverID', Rec."Approver ID");
-        Params.Add('RecordID', Format(Rec."Record ID to Approve"));
-        NtfyEvent.SendNotifications(NtfyEvent.EventType::ApprovalRequested, Params);
+        Params.Add('Error Message', JobQueueEntry."Error Message");
+        Params.Add('ObjectType', Format(JobQueueEntry."Object Type to Run"));
+        Params.Add('ObjectID', Format(JobQueueEntry."Object ID to Run"));
+        NtfyEvent.SendNotifications(NtfyEvent.EventType::JobQueueFailed, Params);
     end;
 }

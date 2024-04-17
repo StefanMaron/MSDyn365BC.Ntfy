@@ -29,4 +29,9 @@ enum 71179875 EventTypeNTSTM implements INtfyEventNTSTM
         Caption = 'Approval requested';
         Implementation = INtfyEventNTSTM = ApprovalRequestedNTSTM;
     }
+    value(5; JobQueueFailed)
+    {
+        Caption = 'Job queue failed';
+        Implementation = INtfyEventNTSTM = JobQueueFailedNTSTM;
+    }
 }
