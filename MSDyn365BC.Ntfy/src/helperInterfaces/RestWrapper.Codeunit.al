@@ -1,5 +1,8 @@
 codeunit 71179880 RestWrapperNTSTM implements IRestWrapperNTSTM
 {
+    InherentEntitlements = X;
+    InherentPermissions = X;
+
     procedure CreateBody(Content: Text) HttpContent: Codeunit System.RestClient."Http Content"
     begin
         HttpContent.Create(Content);

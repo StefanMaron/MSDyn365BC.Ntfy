@@ -9,7 +9,6 @@ enum 71179875 EventTypeNTSTM implements INtfyEventNTSTM
     {
         Caption = '', Locked = true;
     }
-
     value(1; SalesDocumentReopened)
     {
         Caption = 'Sales document reopened';

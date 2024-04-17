@@ -5,6 +5,8 @@ using System.RestClient;
 codeunit 71179879 BatchSendNtfysNTSTM
 {
     TableNo = NtfyEventRequestNTSTM;
+    InherentEntitlements = X;
+    InherentPermissions = X;
 
     trigger OnRun()
     var

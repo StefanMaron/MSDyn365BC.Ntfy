@@ -1,9 +1,10 @@
 namespace StefanMaron.Ntfy;
 using Microsoft.Sales.Document;
-using System.RestClient;
 
 codeunit 71179877 SalesDocumentReleasedNTSTM implements INtfyEventNTSTM
 {
+    InherentEntitlements = X;
+    InherentPermissions = X;
 
     procedure SetSettings(NtfyEvent: Record NtfyEventNTSTM)
     var

@@ -9,6 +9,8 @@ page 71179875 NtfyEventsNTSTM
     DelayedInsert = true;
     SourceTable = NtfyEventNTSTM;
     PopulateAllFields = true;
+    InherentEntitlements = X;
+    InherentPermissions = X;
 
     layout
     {

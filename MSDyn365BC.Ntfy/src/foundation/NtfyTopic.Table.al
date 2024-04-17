@@ -8,6 +8,8 @@ table 71179876 NtfyTopicNTSTM
     DrillDownPageId = NtfyTopicsNTSTM;
     LookupPageId = NtfyTopicsNTSTM;
     DataClassification = CustomerContent;
+    InherentEntitlements = X;
+    InherentPermissions = X;
 
     fields
     {

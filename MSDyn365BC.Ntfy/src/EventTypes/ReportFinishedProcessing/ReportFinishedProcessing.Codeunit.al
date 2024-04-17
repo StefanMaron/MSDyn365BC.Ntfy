@@ -1,5 +1,8 @@
 codeunit 71179883 ReportFinishedProcessingNTSTM implements INtfyEventNTSTM
 {
+    InherentEntitlements = X;
+    InherentPermissions = X;
+
     procedure SetSettings(NtfyEvent: Record NtfyEventNTSTM)
     var
         AllObjWithCaption: Record AllObjWithCaption;

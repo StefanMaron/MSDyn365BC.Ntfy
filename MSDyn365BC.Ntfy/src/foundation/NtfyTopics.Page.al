@@ -9,6 +9,8 @@ page 71179876 NtfyTopicsNTSTM
     DelayedInsert = true;
     PopulateAllFields = true;
     SourceTable = NtfyTopicNTSTM;
+    InherentEntitlements = X;
+    InherentPermissions = X;
 
     layout
     {

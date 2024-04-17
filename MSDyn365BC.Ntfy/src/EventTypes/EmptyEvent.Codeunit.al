@@ -2,6 +2,9 @@ namespace StefanMaron.Ntfy;
 
 codeunit 71179876 EmptyEventNTSTM implements INtfyEventNTSTM
 {
+    InherentEntitlements = X;
+    InherentPermissions = X;
+
     procedure SetSettings(NtfyEvent: Record NtfyEventNTSTM)
     begin
 

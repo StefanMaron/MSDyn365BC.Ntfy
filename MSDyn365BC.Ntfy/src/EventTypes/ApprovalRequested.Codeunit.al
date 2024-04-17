@@ -1,9 +1,11 @@
 namespace StefanMaron.Ntfy;
-using Microsoft.Sales.Document;
+
 using System.Automation;
 
 codeunit 71179884 ApprovalRequestedNTSTM implements INtfyEventNTSTM
 {
+    InherentEntitlements = X;
+    InherentPermissions = X;
 
     procedure SetSettings(NtfyEvent: Record NtfyEventNTSTM)
     var
