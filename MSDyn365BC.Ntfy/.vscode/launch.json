@@ -1,25 +1,34 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "BC23-dev",
-            "type": "al",
-            "request": "launch",
-            "environmentType": "OnPrem",
-            "server": "http://BC23-dev",
-            "port": 7049,
-            "serverInstance": "BC",
-            "authentication": "UserPassword",
-            "breakOnError": "All",
-            "breakOnRecordWrite": "None",
-            "launchBrowser": true,
-            "enableSqlInformationDebugger": true,
-            "enableLongRunningSqlStatements": true,
-            "longRunningSqlStatementsThreshold": 500,
-            "numberOfSqlStatements": 10,
-            "tenant": "default",
-            "usePublicURLFromServer": true,
-            "schemaUpdateMode": "ForceSync"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "al",
+      "request": "launch",
+      "name": "launch: Ntfy",
+      "server": "https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com",
+      "serverInstance": "f019f537aefddev",
+      "port": 443,
+      "authentication": "UserPassword",
+      "startupObjectId": 22,
+      "startupObjectType": "Page",
+      "tenant": "default",
+      "breakOnError": true,
+      "launchBrowser": true,
+      "enableLongRunningSqlStatements": true,
+      "enableSqlInformationDebugger": true,
+      "environmentType": "OnPrem"
+    },
+    {
+      "type": "al",
+      "request": "snapshotInitialize",
+      "name": "snapshotInitialize: Ntfy",
+      "server": "https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com",
+      "serverInstance": "f019f537aefdsnap",
+      "port": 443,
+      "authentication": "UserPassword",
+      "tenant": "default",
+      "environmentType": "OnPrem",
+      "breakOnNext": "WebClient"
+    }
+  ]
 }

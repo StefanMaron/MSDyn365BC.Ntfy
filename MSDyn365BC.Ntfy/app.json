@@ -8,13 +8,13 @@
   "privacyStatement": "https://stefanmaron.com/privacystatement/",
   "EULA": "https://stefanmaron.com/eula/",
   "help": "https://stefanmaron.com/MSDyn365BC-Ntf/",
-  "contextSensitiveHelpUrl": "https://stefanmaron.com/MSDyn365BC-Ntf/",
+  "contextSensitiveHelpUrl": "https://stefanmaron.com/MSDyn365BC-Ntfy/",
   "url": "https://stefanmaron.com/MSDyn365BC-Ntf/",
   "logo": "assets/ntfy.png",
   "dependencies": [],
   "screenshots": [],
   "platform": "1.0.0.0",
-  "application": "22.0.0.0",
+  "application": "25.0.0.0",
   "internalsVisibleTo": [
     {
       "id": "ae87fcc8-d66a-40c9-928e-efc6e9f7f2df",
