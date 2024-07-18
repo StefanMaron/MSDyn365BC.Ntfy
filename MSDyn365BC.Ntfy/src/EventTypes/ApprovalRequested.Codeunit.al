@@ -9,18 +9,13 @@ codeunit 71179884 ApprovalRequestedNTSTM implements INtfyEventNTSTM
 
     procedure SetSettings(NtfyEvent: Record NtfyEventNTSTM)
     var
-        FilterPageBuilder: FilterPageBuilder;
+        NtfyHelper: Codeunit NtfyHelperNTSTM;
+        FilterText: Text[2048];
     begin
-        FilterPageBuilder.AddTable('Approval Entry', Database::"Approval Entry");
-        if NtfyEvent.FilterText <> '' then
-            FilterPageBuilder.SetView('Approval Entry', NtfyEvent.FilterText);
-        if FilterPageBuilder.RunModal() then begin
-            if not FilterPageBuilder.GetView('Approval Entry').Contains('WHERE') then
-                NtfyEvent.Validate(FilterText, '')
-            else
-                NtfyEvent.Validate(FilterText, FilterPageBuilder.GetView('Approval Entry'));
-            NtfyEvent.Modify(true);
-        end;
+        FilterText := NtfyEvent.FilterText;
+        NtfyHelper.GetFilterTextForTable(Database::"Approval Entry", NtfyEvent.FilterText);
+        NtfyEvent.Validate(FilterText, NtfyEvent.FilterText);
+        NtfyEvent.Modify(true);
     end;
 
     procedure ResetSettings(NtfyEvent: Record NtfyEventNTSTM);

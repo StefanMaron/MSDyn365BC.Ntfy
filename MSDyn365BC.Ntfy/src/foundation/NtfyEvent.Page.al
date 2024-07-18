@@ -3,12 +3,13 @@ using StefanMaron.Ntfy;
 page 71179875 NtfyEventsNTSTM
 {
     Caption = 'Ntfy Events';
-    PageType = List;
+    PageType = ListPart;
     ApplicationArea = All;
-    UsageCategory = Administration;
+    UsageCategory = None;
     DelayedInsert = true;
     SourceTable = NtfyEventNTSTM;
     PopulateAllFields = true;
+    AutoSplitKey = true;
     InherentEntitlements = X;
     InherentPermissions = X;
 
@@ -18,13 +19,8 @@ page 71179875 NtfyEventsNTSTM
         {
             repeater(GroupName)
             {
-                field(UserName; Rec.UserName)
-                {
-                    //TODO: Visible for administrators 
-                    Visible = false;
-                }
-                field(NtfyTopic; Rec.NtfyTopic) { }
                 field(EventType; Rec.EventType) { }
+                field(Description; Rec.Description) { }
                 field(FilterText; Rec.FilterText)
                 {
                     Caption = 'Filter';
@@ -66,17 +62,4 @@ page 71179875 NtfyEventsNTSTM
             }
         }
     }
-
-    trigger OnOpenPage()
-    begin
-        SetUserFilter();
-    end;
-
-    local procedure SetUserFilter()
-    begin
-        //TODO: Administrators should be able to see all users
-        Rec.FilterGroup(2);
-        Rec.SetRange(UserName, UserId);
-        Rec.FilterGroup(0);
-    end;
 }

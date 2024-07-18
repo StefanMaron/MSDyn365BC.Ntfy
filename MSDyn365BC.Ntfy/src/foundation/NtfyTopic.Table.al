@@ -5,8 +5,8 @@ using System.Security.AccessControl;
 table 71179876 NtfyTopicNTSTM
 {
     Caption = 'Ntfy Topic';
-    DrillDownPageId = NtfyTopicsNTSTM;
-    LookupPageId = NtfyTopicsNTSTM;
+    DrillDownPageId = NtfyTopicListNTSTM;
+    LookupPageId = NtfyTopicListNTSTM;
     DataClassification = CustomerContent;
     InherentEntitlements = RIMDX;
     InherentPermissions = RIMDX;
@@ -18,10 +18,16 @@ table 71179876 NtfyTopicNTSTM
             Caption = 'User Name';
             TableRelation = User."User Name";
             ValidateTableRelation = false;
+            Editable = false;
         }
         field(2; Topic; Text[150])
         {
             Caption = 'Topic';
+        }
+        field(3; Enabled; Boolean)
+        {
+            Caption = 'Enabled';
+            InitValue = true;
         }
     }
 

@@ -10,18 +10,13 @@ codeunit 71179885 JobQueueFailedNTSTM implements INtfyEventNTSTM
 
     procedure SetSettings(NtfyEvent: Record NtfyEventNTSTM)
     var
-        FilterPageBuilder: FilterPageBuilder;
+        NtfyHelper: Codeunit NtfyHelperNTSTM;
+        FilterText: Text[2048];
     begin
-        FilterPageBuilder.AddTable('Job Queue Entry', Database::"Job Queue Entry");
-        if NtfyEvent.FilterText <> '' then
-            FilterPageBuilder.SetView('Job Queue Entry', NtfyEvent.FilterText);
-        if FilterPageBuilder.RunModal() then begin
-            if not FilterPageBuilder.GetView('Job Queue Entry').Contains('WHERE') then
-                NtfyEvent.Validate(FilterText, '')
-            else
-                NtfyEvent.Validate(FilterText, FilterPageBuilder.GetView('Job Queue Entry'));
-            NtfyEvent.Modify(true);
-        end;
+        FilterText := NtfyEvent.FilterText;
+        NtfyHelper.GetFilterTextForTable(Database::"Job Queue Entry", FilterText);
+        NtfyEvent.Validate(FilterText, FilterText);
+        NtfyEvent.Modify(true);
     end;
 
     procedure ResetSettings(NtfyEvent: Record NtfyEventNTSTM);

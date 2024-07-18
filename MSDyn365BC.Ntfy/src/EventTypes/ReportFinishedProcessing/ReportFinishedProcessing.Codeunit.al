@@ -6,20 +6,18 @@ codeunit 71179883 ReportFinishedProcessingNTSTM implements INtfyEventNTSTM
     procedure SetSettings(NtfyEvent: Record NtfyEventNTSTM)
     var
         AllObjWithCaption: Record AllObjWithCaption;
+        NtfyHelper: Codeunit NtfyHelperNTSTM;
         FilterPageBuilder: FilterPageBuilder;
+        FilterText: Text[2048];
+        FilterPageCaptionLbl: Label 'Report List';
     begin
-        FilterPageBuilder.AddTable('Report List', Database::AllObjWithCaption);
-        FilterPageBuilder.AddField('Report List', AllObjWithCaption."Object Type", 'Report');
-        FilterPageBuilder.AddField('Report List', AllObjWithCaption."Object ID");
-        if NtfyEvent.FilterText <> '' then
-            FilterPageBuilder.SetView('Report List', NtfyEvent.FilterText);
-        if FilterPageBuilder.RunModal() then begin
-            if not FilterPageBuilder.GetView('Report List').Contains('WHERE') then
-                NtfyEvent.Validate(FilterText, '')
-            else
-                NtfyEvent.Validate(FilterText, FilterPageBuilder.GetView('Report List'));
-            NtfyEvent.Modify(true);
-        end;
+        FilterPageBuilder.AddField(FilterPageCaptionLbl, AllObjWithCaption."Object Type", 'Report');
+        FilterPageBuilder.AddField(FilterPageCaptionLbl, AllObjWithCaption."Object ID");
+
+        FilterText := NtfyEvent.FilterText;
+        NtfyHelper.GetFilterTextForTable(FilterPageBuilder, FilterPageCaptionLbl, Database::AllObjWithCaption, FilterText);
+        NtfyEvent.Validate(FilterText, FilterText);
+        NtfyEvent.Modify(true);
     end;
 
     procedure ResetSettings(NtfyEvent: Record NtfyEventNTSTM)

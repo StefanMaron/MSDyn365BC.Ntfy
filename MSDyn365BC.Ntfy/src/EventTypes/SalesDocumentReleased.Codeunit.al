@@ -9,18 +9,13 @@ codeunit 71179877 SalesDocumentReleasedNTSTM implements INtfyEventNTSTM
 
     procedure SetSettings(NtfyEvent: Record NtfyEventNTSTM)
     var
-        FilterPageBuilder: FilterPageBuilder;
+        NtfyHelper: Codeunit NtfyHelperNTSTM;
+        FilterText: Text[2048];
     begin
-        FilterPageBuilder.AddTable('Sales Header', Database::"Sales Header");
-        if NtfyEvent.FilterText <> '' then
-            FilterPageBuilder.SetView('Sales Header', NtfyEvent.FilterText);
-        if FilterPageBuilder.RunModal() then begin
-            if not FilterPageBuilder.GetView('Sales Header').Contains('WHERE') then
-                NtfyEvent.Validate(FilterText, '')
-            else
-                NtfyEvent.Validate(FilterText, FilterPageBuilder.GetView('Sales Header'));
-            NtfyEvent.Modify(true);
-        end;
+        FilterText := NtfyEvent.FilterText;
+        NtfyHelper.GetFilterTextForTable(Database::"Sales Header", FilterText);
+        NtfyEvent.Validate(FilterText, FilterText);
+        NtfyEvent.Modify(true);
     end;
 
     procedure ResetSettings(NtfyEvent: Record NtfyEventNTSTM)
