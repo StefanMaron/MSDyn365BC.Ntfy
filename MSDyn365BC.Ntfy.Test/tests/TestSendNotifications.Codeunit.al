@@ -15,7 +15,7 @@ codeunit 50004 "TestSendNotifications"
     begin
         NtfyEvent.Init();
         // NtfyEvent.NtfyMessage := 'Hello World'; //fixme
-        NtfyEvent.NtfyTopic := 'Hello World';
+        NtfyEvent.Topic := 'Hello World';
         NtfyEvent.EventType := NtfyEvent.EventType::DummyNtfyType;
         if not NtfyEvent.Insert() then;
         NtfyEvent.SendNotifications(DummyNtfyType, NtfyEvent.EventType::DummyNtfyType, Params, RunBatchWrapperEmpty);
@@ -36,12 +36,12 @@ codeunit 50004 "TestSendNotifications"
     begin
         NtfyEvent.Init();
         // NtfyEvent.NtfyMessage := 'true'; //fixme
-        NtfyEvent.NtfyTopic := 'true';
+        NtfyEvent.Topic := 'true';
         NtfyEvent.EventType := NtfyEvent.EventType::DummyNtfyType;
         if not NtfyEvent.Insert() then;
         NtfyEvent.Init();
         // NtfyEvent.NtfyMessage := 'false'; //fixme
-        NtfyEvent.NtfyTopic := 'false';
+        NtfyEvent.Topic := 'false';
         NtfyEvent.EventType := NtfyEvent.EventType::DummyNtfyType;
         if not NtfyEvent.Insert() then;
 

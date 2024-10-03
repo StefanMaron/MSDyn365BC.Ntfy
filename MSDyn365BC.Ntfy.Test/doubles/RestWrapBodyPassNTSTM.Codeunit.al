@@ -15,4 +15,9 @@ codeunit 50003 RestWrapBodyPassNTSTM implements IRestWrapperNTSTM
     begin
         Assert.AreEqual(TempContentText, Content.AsText(), 'Content is not the same');
     end;
+
+    procedure SetDefaultRequestHeader(Name: Text; Value: Text)
+    begin
+
+    end;
 }

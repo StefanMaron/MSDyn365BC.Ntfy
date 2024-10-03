@@ -57,4 +57,9 @@ codeunit 50006 DummyNtfyTypeNTSTM implements INtfyEventNTSTM
     begin
         exit(GetMessageWasCalled);
     end;
+
+    procedure GetTitle(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[150]
+    begin
+
+    end;
 }

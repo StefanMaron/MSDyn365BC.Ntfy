@@ -8,4 +8,9 @@ codeunit 50002 RestWrapperTestPostNTSTM implements IRestWrapperNTSTM
     begin
         Error('Post was called with RequestUri: %1', RequestUri);
     end;
+
+    procedure SetDefaultRequestHeader(Name: Text; Value: Text)
+    begin
+
+    end;
 }

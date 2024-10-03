@@ -12,7 +12,7 @@ codeunit 50008 MarkingTestTypeNTSTM implements INtfyEventNTSTM
 
     procedure FilterNtfyEntriesBeforeBatchSend(var NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]);
     begin
-        NtfyEvent.SetRange(NtfyTopic, 'true');
+        NtfyEvent.SetRange(Topic, 'true');
     end;
 
     procedure DoCallNtfyEvent(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Boolean;
@@ -25,4 +25,8 @@ codeunit 50008 MarkingTestTypeNTSTM implements INtfyEventNTSTM
 
     end;
 
+    procedure GetTitle(NtfyEvent: Record NtfyEventNTSTM; Params: Dictionary of [Text, Text]) ReturnValue: Text[150]
+    begin
+
+    end;
 }

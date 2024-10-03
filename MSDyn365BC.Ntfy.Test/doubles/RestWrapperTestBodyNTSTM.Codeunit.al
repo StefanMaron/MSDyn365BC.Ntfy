@@ -8,4 +8,9 @@ codeunit 50001 RestWrapperTestBodyNTSTM implements IRestWrapperNTSTM
     procedure Post(RequestUri: Text; Content: Codeunit System.RestClient."Http Content") HttpResponseMessage: Codeunit System.RestClient."Http Response Message"
     begin
     end;
+
+    procedure SetDefaultRequestHeader(Name: Text; Value: Text)
+    begin
+
+    end;
 }
