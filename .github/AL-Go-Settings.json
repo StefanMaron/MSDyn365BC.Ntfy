@@ -1,4 +1,5 @@
 {
   "type": "AppSource App",
-  "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@main"
+  "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@preview",
+  "templateSha": "312a05fd842cc70b667b1856d70a7ea885ee3b6e"
 }
